@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 18, 2024 at 05:26 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Host: localhost:3306
+-- Generation Time: Jan 05, 2025 at 05:18 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,10 +28,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tb_admin` (
-  `id_admin` int(255) NOT NULL,
-  `name_admin` varchar(255) DEFAULT NULL,
-  `your_email` varchar(255) DEFAULT NULL,
-  `password_admin` varchar(255) DEFAULT NULL
+  `id_admin` int NOT NULL,
+  `name_admin` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `your_email` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `password_admin` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -41,7 +41,8 @@ CREATE TABLE `tb_admin` (
 INSERT INTO `tb_admin` (`id_admin`, `name_admin`, `your_email`, `password_admin`) VALUES
 (1, 'arya', 'bagusarya@gmail.com', '$2y$10$hTWGFW2pa3ISJuDcmENqxenJZj8NW6NmRGGc5fSbUUsBUTPCR2EJK'),
 (3, 'test', 'test@gmail.com', '$2y$10$2j81kwXCA4jlB6DlkcYBrOeDDEQKdc0vh4KpeCVx/pFjkUhAgawkW'),
-(4, 'test.custumer', 'test.custumer@gmail.com', '$2y$10$iaxTBXePhZ3V.gsFsq9DX.wqmjgu11uAXDUt25Jucq//y43Zf1E9C');
+(4, 'test.custumer', 'test.custumer@gmail.com', '$2y$10$iaxTBXePhZ3V.gsFsq9DX.wqmjgu11uAXDUt25Jucq//y43Zf1E9C'),
+(5, 'rendi prayoga', 'tes1@gmail.com', '$2y$10$NF5IGX2nPwIofYOmxHRQxOd858274XYtyGNMslrisXM9jSggK4ndG');
 
 -- --------------------------------------------------------
 
@@ -50,18 +51,18 @@ INSERT INTO `tb_admin` (`id_admin`, `name_admin`, `your_email`, `password_admin`
 --
 
 CREATE TABLE `tb_costumer` (
-  `id_costumer` int(20) NOT NULL,
-  `nama_costumer` varchar(255) DEFAULT NULL,
-  `alamat_costumer` varchar(255) DEFAULT NULL,
-  `nomer_telepon` varchar(20) DEFAULT NULL,
-  `jenis_kelamin` enum('pria','wanita') DEFAULT NULL
+  `id_costumer` int NOT NULL,
+  `nama-costumer` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `alamat-costumer` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `nomer-telepon` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `jenis-kelamin` enum('pria','wanita') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_costumer`
 --
 
-INSERT INTO `tb_costumer` (`id_costumer`, `nama_costumer`, `alamat_costumer`, `nomer_telepon`, `jenis_kelamin`) VALUES
+INSERT INTO `tb_costumer` (`id_costumer`, `nama-costumer`, `alamat-costumer`, `nomer-telepon`, `jenis-kelamin`) VALUES
 (52, 'Herman Gozali', 'Batam', '081236578434', 'pria'),
 (54, 'Bagus Nararya', 'Batam', '081236578445', 'pria'),
 (56, 'Agung Hermansyah', 'Batam', '081236578445', 'pria'),
@@ -70,10 +71,7 @@ INSERT INTO `tb_costumer` (`id_costumer`, `nama_costumer`, `alamat_costumer`, `n
 (59, 'Basudewa', 'Batam', '081236578434', ''),
 (65, 'Agung Hermansyah', 'Gianyar', '083248845685', 'pria'),
 (66, 'test4', 'test5', '000000000000', ''),
-(67, 'test4', 'test2', '081253656365', 'pria'),
-(68, 'Agung Hermansyah', 'Denpasar', '081236578445', 'pria'),
-(69, 'Agung Hermansyah', 'Denpasar', '081236578445', 'pria'),
-(70, 'test4', 'test2', '083248845685', 'pria');
+(67, 'test4', 'test2', '081253656365', 'pria');
 
 -- --------------------------------------------------------
 
@@ -82,28 +80,27 @@ INSERT INTO `tb_costumer` (`id_costumer`, `nama_costumer`, `alamat_costumer`, `n
 --
 
 CREATE TABLE `tb_mobil` (
-  `id_mobil` int(20) NOT NULL,
-  `gambar_mobil` varchar(255) DEFAULT NULL,
-  `merek_mobil` varchar(255) DEFAULT NULL,
-  `harga_sewa_nama` varchar(255) DEFAULT NULL,
-  `harga_sewa_angka` int(255) DEFAULT NULL,
-  `mobil_sopir` varchar(255) DEFAULT NULL,
-  `bbm` varchar(255) DEFAULT NULL,
-  `jumblah_penumpang` int(10) DEFAULT NULL,
-  `plat_mobil` varchar(255) DEFAULT NULL
+  `id_mobil` int NOT NULL,
+  `gambar-mobil` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `merek-mobil` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `harga-sewa-nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `harga-sewa-angka` int DEFAULT NULL,
+  `mobil-sopir` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `bbm` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `jumblah-penumpang` int DEFAULT NULL,
+  `plat-mobil` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_mobil`
 --
 
-INSERT INTO `tb_mobil` (`id_mobil`, `gambar_mobil`, `merek_mobil`, `harga_sewa_nama`, `harga_sewa_angka`, `mobil_sopir`, `bbm`, `jumblah_penumpang`, `plat_mobil`) VALUES
+INSERT INTO `tb_mobil` (`id_mobil`, `gambar-mobil`, `merek-mobil`, `harga-sewa-nama`, `harga-sewa-angka`, `mobil-sopir`, `bbm`, `jumblah-penumpang`, `plat-mobil`) VALUES
 (6, '67624ebc1821a.png', 'Mitsubishi Pajero Sport', 'Rp. 1.400.000/ 1 Hari', 1400000, 'Mobil', 'BBM Penuh', 6, '9876'),
 (7, '62b68dca2a4f1.png', 'New Avanza', 'Rp. 400.000/ 1 Hari', 400000, 'Mobil &amp; Sopir', 'BBM Penuh', 5, '7866'),
 (8, '62b6f97ec1be9.png', 'New Fortuner', 'Rp. 1.500.000 / 1 Hari', 1500000, 'Mobil &amp; Sopir', 'BBM Penuh', 5, '4535'),
 (12, '62b7a82953c1e.png', 'Alphard Transformer', 'Rp. 2.500.000 / 1 Hari', 2500000, 'Mobil &amp; Sopir', 'BBM Penuh', 5, '7864'),
-(13, '62b95d527339f.png', 'Hiace Premio', 'Rp. 400.000/ 1 Hari', 400000, 'Mobil &amp; Sopir', 'BBM Penuh', 6, '2343'),
-(14, '67624ed176488.jpg', 'Toyota GR 86', '1.500.000', 1500, 'Mobil', 'Bensin', 4, 'BP 4566 AZ');
+(13, '62b95d527339f.png', 'Hiace Premio', 'Rp. 400.000/ 1 Hari', 400000, 'Mobil &amp; Sopir', 'BBM Penuh', 6, '2343');
 
 -- --------------------------------------------------------
 
@@ -112,24 +109,25 @@ INSERT INTO `tb_mobil` (`id_mobil`, `gambar_mobil`, `merek_mobil`, `harga_sewa_n
 --
 
 CREATE TABLE `tb_transaksi` (
-  `id_sewa` int(20) NOT NULL,
-  `nama_costumer` varchar(255) DEFAULT NULL,
-  `merek_mobil` varchar(255) DEFAULT NULL,
-  `tanggal_awal_sewa` datetime DEFAULT NULL,
-  `jangka_waktu_sewa` varchar(255) DEFAULT NULL,
-  `harga_sewa_perhari` int(100) DEFAULT NULL,
-  `total_bayar` int(100) DEFAULT NULL,
-  `status_sewa` enum('belum bayar','sudah bayar') DEFAULT NULL
+  `id_sewa` int NOT NULL,
+  `nama-costumer` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `merek-mobil` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tanggal-awal-sewa` datetime DEFAULT NULL,
+  `jangka-waktu-sewa` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `harga-sewa-perhari` int DEFAULT NULL,
+  `total-bayar` int DEFAULT NULL,
+  `status-sewa` enum('belum bayar','sudah bayar') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_transaksi`
 --
 
-INSERT INTO `tb_transaksi` (`id_sewa`, `nama_costumer`, `merek_mobil`, `tanggal_awal_sewa`, `jangka_waktu_sewa`, `harga_sewa_perhari`, `total_bayar`, `status_sewa`) VALUES
+INSERT INTO `tb_transaksi` (`id_sewa`, `nama-costumer`, `merek-mobil`, `tanggal-awal-sewa`, `jangka-waktu-sewa`, `harga-sewa-perhari`, `total-bayar`, `status-sewa`) VALUES
 (5, 'Virgo Rais', 'Alphard', '2022-06-26 00:00:00', '6', 200000, 7000000, 'sudah bayar'),
 (6, 'Agung Hermansyah', 'Mitsubishi Pajero', '2022-06-26 00:00:00', '3', 1000000, 7000000, 'belum bayar'),
-(7, 'tes10', 'Mitsubishi Pajero', '2022-06-27 00:00:00', '3', 1000000, 7000000, 'belum bayar');
+(7, 'tes10', 'Mitsubishi Pajero', '2022-06-27 00:00:00', '3', 1000000, 7000000, 'belum bayar'),
+(12, 'andi', 'avanza', '2025-01-17 00:00:00', '2 hari', 430000, 0, '');
 
 -- --------------------------------------------------------
 
@@ -138,10 +136,10 @@ INSERT INTO `tb_transaksi` (`id_sewa`, `nama_costumer`, `merek_mobil`, `tanggal_
 --
 
 CREATE TABLE `tb_users` (
-  `id_user` int(20) NOT NULL,
-  `your_name` varchar(255) DEFAULT NULL,
-  `your_email` varchar(255) DEFAULT NULL,
-  `pwd_user` varchar(255) DEFAULT NULL
+  `id_user` int NOT NULL,
+  `your_name` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `your_email` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `pwd_user` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -161,7 +159,9 @@ INSERT INTO `tb_users` (`id_user`, `your_name`, `your_email`, `pwd_user`) VALUES
 (14, 'dewa', 'dewa@gmail.com', '$2y$10$FDuJ5V6kEepEw8X2mjLHWOacNvJ9GxdmY7aeJINB1VBLUTRR6XQ.G'),
 (15, 'gerry', 'gerry@gmail.com', '$2y$10$qmsSPgeG.mMDYopiKtew6ull5l4QyCHDNuu4z75.GKKnujcmHIi1q'),
 (16, 'sovia', 'sovia@gmail.com', '$2y$10$UAbcJmLQ4xmxADS6CvArMeE5XK6FiI10c4rGzmXjFLQgzy0gspGEu'),
-(17, 'test', 'test.a@gmail.com', '$2y$10$/D4rar3rHzL/zb.qmU.SeumkC0L877.k0ssf7S7gAZZgY48NKmGVm');
+(17, 'test', 'test.a@gmail.com', '$2y$10$/D4rar3rHzL/zb.qmU.SeumkC0L877.k0ssf7S7gAZZgY48NKmGVm'),
+(18, 'rendi prayoga', 'tes1@gmail.com', '$2y$10$9Y8PbuUs8uyigvtKAys0Eeh7Ic8lflXn1qWbU7rJ1u6j8IJVf6yTe'),
+(19, 'wibo kurniawan', 'wibokurniawan@gmail.com', '$2y$10$N3Btw4IsWvptOon4UWE9E.kgdvAen7V.92H89g5wW34r9IlhsRYji');
 
 --
 -- Indexes for dumped tables
@@ -205,31 +205,31 @@ ALTER TABLE `tb_users`
 -- AUTO_INCREMENT for table `tb_admin`
 --
 ALTER TABLE `tb_admin`
-  MODIFY `id_admin` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_admin` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_costumer`
 --
 ALTER TABLE `tb_costumer`
-  MODIFY `id_costumer` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id_costumer` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `tb_mobil`
 --
 ALTER TABLE `tb_mobil`
-  MODIFY `id_mobil` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_mobil` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `id_sewa` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_sewa` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `id_user` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
