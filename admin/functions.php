@@ -223,91 +223,133 @@ function upload()
     return $namaFileGenerate;
 }
 
-
+//Register
 function registrasi($data)
 {
     global $conn;
 
-    $yourName = strtolower(stripslashes($data["your-name"]));
-    $yourEmail = strtolower(stripslashes($data["your-email"]));
-    $password = mysqli_real_escape_string($conn, $data["password"]);
-    $passwordConfirm = mysqli_real_escape_string($conn, $data["passwordConfirm"]);
+    // Bersihkan input
+    $email = strtolower(trim($data["email"]));
+    $password = trim($data["password"]);
+    $nama = mysqli_real_escape_string($conn, trim($data["nama"]));
+    $tlpn = mysqli_real_escape_string($conn, trim($data["tlpn"]));
+    $alamat = mysqli_real_escape_string($conn, trim($data["alamat"]));
+    $role = mysqli_real_escape_string($conn, trim($data["role"]));
 
-    // Cek apakah username sudah tersedia
-    $result = mysqli_query($conn, "SELECT your_name FROM tb_users WHERE your_name = '$yourName'");
+    // Validasi input
+    if (empty($email) || empty($password) || empty($nama) || empty($tlpn) || empty($alamat) || empty($role)) {
+        echo '<div class="alert alert-danger" role="alert">
+                Semua kolom wajib diisi!
+              </div>';
+        return false;
+    }
+
+    // Validasi format email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo '<div class="alert alert-danger" role="alert">
+                Format email tidak valid!
+              </div>';
+        return false;
+    }
+
+    // Periksa apakah email sudah terdaftar
+    $result = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'");
     if (mysqli_fetch_assoc($result)) {
         echo '<div class="alert alert-danger" role="alert">
-                Username sudah tersedia!
-              </div>';
-        return false;
-    }
-
-    // Validasi email
-    if (!filter_var($yourEmail, FILTER_VALIDATE_EMAIL)) {
-        echo '<div class="alert alert-danger" role="alert">
-                Email tidak valid!
-              </div>';
-        return false;
-    }
-
-    // Cek apakah konfirmasi password sudah sesuai
-    if ($password !== $passwordConfirm) {
-        echo '<div class="alert alert-danger" role="alert">
-                Password tidak sesuai!
+                Email sudah terdaftar!
               </div>';
         return false;
     }
 
     // Enkripsi password
-    $encrypsiPwd = password_hash($password, PASSWORD_DEFAULT);
+    $encryptedPwd = password_hash($password, PASSWORD_DEFAULT);
 
-    // Simpan data ke database
-    $query = "INSERT INTO tb_users (your_name, your_email, pwd) VALUES ('$yourName', '$yourEmail', '$encrypsiPwd')";
+    // Masukkan data ke database
+    $query = "INSERT INTO user (nama, email, password, nomor_telepon, alamat, role) 
+          VALUES ('$nama', '$email', '$encryptedPwd', '$tlpn', '$alamat', '$role')";
+
     if (!mysqli_query($conn, $query)) {
         echo '<div class="alert alert-danger" role="alert">
-                Error: ' . mysqli_error($conn) . '
+                Error: ' . htmlspecialchars(mysqli_error($conn)) . '
               </div>';
         return false;
     }
-
     return mysqli_affected_rows($conn);
 }
 
-
-function registrasiAdmin($data)
+//Login
+function login($data)
 {
     global $conn;
 
-    $yourName = strtolower(stripslashes($data["your-name"]));
-    $yourEmail = strtolower(stripslashes($data["your-email"]));
-    $password = mysqli_real_escape_string($conn, $data["password"]);
-    $passwordConfirm = mysqli_real_escape_string($conn, $data["passwordConfirm"]);
+    // Bersihkan input
+    $email = strtolower(trim($data["email"]));
+    $password = trim($data["password"]);
 
-    // cek apakah username dan email sudah tersedia
-    $result = mysqli_query($conn, "SELECT name_admin FROM tb_admin WHERE name_admin = '$yourName'");
-    if (mysqli_fetch_assoc($result)) {
+    // Validasi input
+    if (empty($email) || empty($password)) {
         echo '<div class="alert alert-danger" role="alert">
-                Username Sudah Tersedia !
+                Email dan password wajib diisi!
               </div>';
         return false;
     }
 
-    // cek apakah konfirmasi password sudah sesuai 
-    if ($password !== $passwordConfirm) {
+    // Validasi format email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo '<div class="alert alert-danger" role="alert">
-                Password Tidak Sesuai !
+                Format email tidak valid!
               </div>';
         return false;
     }
 
-    // encrypsi password
-    $encrypsiPwd = password_hash($password, PASSWORD_DEFAULT);
+    // Gunakan prepared statement untuk mencegah SQL injection
+    $stmt = mysqli_prepare($conn, "SELECT * FROM user WHERE email = ?");
+    if ($stmt === false) {
+        echo '<div class="alert alert-danger" role="alert">
+                Error dalam persiapan query.
+              </div>';
+        return false;
+    }
 
-    // menghubungkan ke dataabase
-    mysqli_query($conn, "INSERT INTO tb_admin VALUES ('', '$yourName', '$yourEmail', '$encrypsiPwd')");
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
-    return mysqli_affected_rows($conn);
+    // Periksa apakah email ada di database
+    if (mysqli_num_rows($result) === 1) {
+        $row = mysqli_fetch_assoc($result);
+
+        // Verifikasi password
+        if (password_verify($password, $row["password"])) {
+            // Mulai sesi
+            session_start();
+            $_SESSION["user_id"] = $row["id"];
+            $_SESSION["email"] = $row["email"];
+            $_SESSION["role"] = $row["role"];
+
+            // Arahkan berdasarkan role
+            switch ($row["role"]) {
+                case "admin":
+                    echo "<script>document.location.href = 'admin/costumer/data-costumer.php';</script>";
+                    break;
+                default:
+                    echo "<script>document.location.href = 'index.php';</script>";
+                    break;
+            }
+            return true;
+        } else {
+            // Password tidak cocok
+            echo "<script>alert('Password salah!');</script>";
+        }
+    } else {
+        // Email tidak ditemukan
+        echo "<script>alert('Email tidak ditemukan!');</script>";
+    }
+
+    return false;
 }
+
+
 
 function cariCostumer($keyword)
 {

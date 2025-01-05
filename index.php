@@ -25,7 +25,7 @@
                     <li><a href="#courses">Daftar Mobil</a></li>
                     <li><a href="#partners">Riwayat</a></li>
                     <li><a href="#contact">Tentang Kami</a></li>
-                    <li><a href="public/sign/login.php" class="tbl-biru">Daftar/Login</a></li>
+                    <li><a href="register.php" class="tbl-biru">Daftar/Login</a></li>
                 </ul>
             </div>
         </div>
@@ -42,7 +42,9 @@
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
             <div class="bg-white shadow-md p-4">
-                <img alt="Mobil Sedan Mercedes-Benz" class="w-full h-48 object-cover" height="200" src="https://storage.googleapis.com/a1aa/image/r9Cs1VCdbAKpEtbuBpeZNCG9vzUvMHsAycQK8JlZFOUyhv9JA.jpg" width="300" />
+                <img alt="Mobil Sedan Mercedes-Benz" class="w-full h-48 object-cover" height="200"
+                    src="https://storage.googleapis.com/a1aa/image/r9Cs1VCdbAKpEtbuBpeZNCG9vzUvMHsAycQK8JlZFOUyhv9JA.jpg"
+                    width="300" />
                 <div class="mt-4">
                     <h2 class="text-lg font-bold">
                         Mobil Sedan Mercedes-Benz
@@ -64,7 +66,9 @@
                 </div>
             </div>
             <div class="bg-white shadow-md p-4">
-                <img alt="Mobil Sedan Mercedes-Benz" class="w-full h-48 object-cover" height="200" src="https://storage.googleapis.com/a1aa/image/r9Cs1VCdbAKpEtbuBpeZNCG9vzUvMHsAycQK8JlZFOUyhv9JA.jpg" width="300" />
+                <img alt="Mobil Sedan Mercedes-Benz" class="w-full h-48 object-cover" height="200"
+                    src="https://storage.googleapis.com/a1aa/image/r9Cs1VCdbAKpEtbuBpeZNCG9vzUvMHsAycQK8JlZFOUyhv9JA.jpg"
+                    width="300" />
                 <div class="mt-4">
                     <h2 class="text-lg font-bold">
                         Mobil Sedan Mercedes-Benz
@@ -86,7 +90,9 @@
                 </div>
             </div>
             <div class="bg-white shadow-md p-4">
-                <img alt="Mobil Sedan Mercedes-Benz" class="w-full h-48 object-cover" height="200" src="https://storage.googleapis.com/a1aa/image/r9Cs1VCdbAKpEtbuBpeZNCG9vzUvMHsAycQK8JlZFOUyhv9JA.jpg" width="300" />
+                <img alt="Mobil Sedan Mercedes-Benz" class="w-full h-48 object-cover" height="200"
+                    src="https://storage.googleapis.com/a1aa/image/r9Cs1VCdbAKpEtbuBpeZNCG9vzUvMHsAycQK8JlZFOUyhv9JA.jpg"
+                    width="300" />
                 <div class="mt-4">
                     <h2 class="text-lg font-bold">
                         Mobil Sedan Mercedes-Benz

@@ -79,7 +79,7 @@
               </a>
             </li>
             <li class="nav-item ms-2">
-              <a href="sign/login.php" class="btn btn-logout">
+              <a href="login.php" class="btn btn-logout">
                 <i class="fas fa-sign-out-alt me-1"></i>
                 Log Out
               </a>
