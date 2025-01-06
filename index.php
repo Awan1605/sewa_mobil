@@ -25,7 +25,7 @@
                     <li><a href="#courses">Daftar Mobil</a></li>
                     <li><a href="#partners">Riwayat</a></li>
                     <li><a href="#contact">Tentang Kami</a></li>
-                    <li><a href="register.php" class="tbl-biru">Daftar/Login</a></li>
+                    <li><a href="login.php" class="tbl-biru">Daftar/Login</a></li>
                 </ul>
             </div>
         </div>

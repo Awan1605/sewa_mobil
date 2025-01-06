@@ -3,7 +3,7 @@ require "../functions.php";
 // ambil id dari Url
 $id = $_GET["id"];
 
-$mobil = query($conn, "SELECT * FROM tb_mobil WHERE id_mobil=$id")[0];
+$mobil = query($conn, "SELECT * FROM mobil WHERE id=$id")[0];
 
 if (isset($_POST["submit"])) {
   if (ubahMobil($_POST) > 0) {
@@ -16,8 +16,8 @@ if (isset($_POST["submit"])) {
   } else {
     echo "
             <script>
-                alert('Data Gagal Diubah!');
-                document.location.href = 'data-mobil.php';
+                // alert('Data Gagal Diubah!');
+                // document.location.href = 'data-mobil.php';
             </script>
         ";
   }
@@ -48,48 +48,43 @@ if (isset($_POST["submit"])) {
         </div>
         <div class="card-body">
           <div class="mb-3 text-left">
-            <input type="hidden" name="id-mobil" value="<?= $mobil["id_mobil"] ?>">
+            <input type="hidden" name="id-mobil" value="<?= $mobil["id"] ?>">
           </div>
           <div class="mb-3 text-left">
 
-            <img src="../../mobil/<?= $mobil["gambar-mobil"] ?>" alt="" width="200" class="mb-3">
-            <input type="hidden" name="gambar-lama" value="<?= $mobil["gambar-mobil"] ?>">
+            <img src="../../mobil/<?= $mobil["gambar"] ?>" alt="" width="200" class="mb-3">
+            <input type="hidden" name="gambar-lama" value="<?= $mobil["gambar"] ?>">
             <input type="file" name="gambar-mobil" class="form-control" id="gambar-mobil">
           </div>
           <div class="mb-3">
             <label for="merek-mobil" class="form-label">Merek Mobil</label>
-            <input type="text" name="merek-mobil" value="<?= $mobil["merek-mobil"] ?>" class="form-control"
-              id="merek-mobil" placeholder="Masukan Merek Mobil" required>
+            <input type="text" name="merek-mobil" value="<?= $mobil["merk"] ?>" class="form-control" id="merek-mobil"
+              placeholder="Masukan Merek Mobil" required>
+          </div>
+          <div class="mb-3">
+            <label for="model-mobil" class="form-label">Model Mobil</label>
+            <input type="text" name="model-mobil" value="<?= $mobil["model"] ?>" class="form-control" id="model-mobil"
+              placeholder="Masukan Model Mobil" required>
           </div>
           <div class="mb-3">
             <label for="harga-sewa" class="form-label">Harga Sewa/1 Hari</label>
-            <input type="text" name="harga-sewa" value="<?= $mobil["harga-sewa-nama"] ?>" class="form-control"
-              id="harga-sewa" placeholder="Masukan Harga Sewa dalam Text" required>
+            <input type="text" name="harga-sewa" value="<?= $mobil["harga"] ?>" class="form-control" id="harga-sewa"
+              placeholder="Masukan Harga Sewa t" required>
           </div>
           <div class="mb-3">
-            <label for="harga-sewa-nilai" class="form-label">Harga Sewa Nilai</label>
-            <input type="text" name="harga-sewa-nilai" value="<?= $mobil["harga-sewa-angka"] ?>" class="form-control"
-              id="harga-sewa-nilai" placeholder="Masukan Harga Sewa dalam Angka" required>
-          </div>
-          <div class="mb-3">
-            <label for="mobil-sopir" class="form-label">Mobil & Sopir</label>
-            <input type="text" name="mobil-sopir" value="<?= $mobil["mobil-sopir"] ?>" class="form-control"
-              id="mobil-sopir" placeholder="Masukan Layanan" required>
-          </div>
-          <div class="mb-3">
-            <label for="bbm" class="form-label">Ketersediaan BBM</label>
+            <label for="bbm" class="form-label">Jenis BBM</label>
             <input type="text" name="bbm" value="<?= $mobil["bbm"] ?>" class="form-control" id="bbm"
-              placeholder="Masukan Ketersediaan BBM" required>
+              placeholder="Masukan Jenis BBM" required>
           </div>
           <div class="mb-3">
-            <label for="jumblah-penumpang" class="form-label">Jumblah Penumpang</label>
-            <input type="text" name="jumblah-penumpang" value="<?= $mobil["jumblah-penumpang"] ?>" class="form-control"
-              id="jumblah-penumpang" placeholder="Masukan Kapasitas Jumblah Penumpang pada mobil" required>
+            <label for="jumlah-kursi" class="form-label">Jumblah Penumpang</label>
+            <input type="text" name="jumlah-kursi" value="<?= $mobil["jumlah_kursi"] ?>" class="form-control"
+              id="jumlah-kursi" placeholder="Masukan Kapasitas Jumblah Penumpang pada mobil" required>
           </div>
           <div class="mb-3">
             <label for="plat-mobil" class="form-label">Plat Mobil</label>
-            <input type="text" name="plat-mobil" value="<?= $mobil["plat-mobil"] ?>" class="form-control"
-              id="plat-mobil" placeholder="Masukan Plat Mobil" required>
+            <input type="text" name="plat-mobil" value="<?= $mobil["plat"] ?>" class="form-control" id="plat-mobil"
+              placeholder="Masukan Plat Mobil" required>
           </div>
         </div>
         <div class="card-footer bg-dark mb-4"></div>

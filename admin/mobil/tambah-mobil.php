@@ -14,7 +14,7 @@ if (isset($_POST["submit"])) {
     echo "
             <script>
                 alert('Data Gagal Ditambahkan!');
-                document.location.href = 'data-mobil.php';
+                // document.location.href = 'data-mobil.php';
             </script>
         ";
   }
@@ -42,48 +42,46 @@ if (isset($_POST["submit"])) {
     <form action="" method="post" enctype="multipart/form-data">
       <div class="card mt-4">
         <div class="card-header text-center bg-dark text-white">
-          Tambahkan Mobil Sewa
+          Tambahkan Data Mobil
         </div>
         <div class="card-body">
           <div class="mb-3 text-left">
-            <label for="gambar" class="form-label">Gambar Mobil</label>
-            <input type="file" name="gambar" class="form-control" id="gambar" required>
+            <label for="gambar-mobil" class="form-label">Gambar Mobil</label>
+            <input type="file" name="gambar-mobil" class="form-control" id="gambar-mobil">
           </div>
           <div class="mb-3">
-            <label for="merek_mobil" class="form-label">Merek Mobil</label>
-            <input type="text" name="merek_mobil" class="form-control" id="merek_mobil"
+            <label for="merek-mobil" class="form-label">Merek Mobil</label>
+            <input type="text" name="merek-mobil" class="form-control" id="merek-mobil"
               placeholder="Masukkan Merek Mobil" required>
           </div>
           <div class="mb-3">
-            <label for="harga_sewa_nama" class="form-label">Harga Sewa/1 Hari</label>
-            <input type="text" name="harga_sewa_nama" class="form-control" id="harga_sewa_nama"
-              placeholder="Masukkan Harga Sewa dalam Text" required>
+            <label for="model-mobil" class="form-label">Model Mobil</label>
+            <input type="text" name="model-mobil" class="form-control" id="model-mobil"
+              placeholder="Masukkan Model Mobil" required>
           </div>
           <div class="mb-3">
-            <label for="harga_sewa_angka" class="form-label">Harga Sewa Nilai</label>
-            <input type="number" name="harga_sewa_angka" class="form-control" id="harga_sewa_angka"
-              placeholder="Masukkan Harga Sewa dalam Angka" required>
-          </div>
-          <div class="mb-3">
-            <label for="mobil_sopir" class="form-label">Mobil & Sopir</label>
-            <input type="text" name="mobil_sopir" class="form-control" id="mobil_sopir" placeholder="Masukkan Layanan"
+            <label for="harga-sewa" class="form-label">Harga Sewa per Hari</label>
+            <input type="text" name="harga-sewa" class="form-control" id="harga-sewa" placeholder="Masukkan Harga Sewa"
               required>
           </div>
           <div class="mb-3">
-            <label for="bbm" class="form-label">Ketersediaan BBM</label>
-            <input type="text" name="bbm" class="form-control" id="bbm" placeholder="Masukkan Ketersediaan BBM"
-              required>
+            <label for="bbm" class="form-label">Jenis BBM</label>
+            <input type="text" name="bbm" class="form-control" id="bbm" placeholder="Masukkan Jenis BBM" required>
           </div>
           <div class="mb-3">
-            <label for="jumblah_penumpang" class="form-label">Jumlah Penumpang</label>
-            <input type="number" name="jumblah_penumpang" class="form-control" id="jumblah_penumpang"
+            <label for="jumblah-kursi" class="form-label">Jumlah Kursi</label>
+            <input type="number" name="jumblah-kursi" class="form-control" id="jumblah-kursi"
               placeholder="Masukkan Kapasitas Jumlah Penumpang" required>
           </div>
           <div class="mb-3">
-            <label for="plat_mobil" class="form-label">Plat Mobil</label>
-            <input type="text" name="plat_mobil" class="form-control" id="plat_mobil" placeholder="Masukkan Plat Mobil"
+            <label for="plat-mobil" class="form-label">Plat Mobil</label>
+            <input type="text" name="plat-mobil" class="form-control" id="plat-mobil" placeholder="Masukkan Plat Mobil"
               required>
           </div>
+          <!-- <div class="mb-3">
+            <label for="ketersediaan" class="form-label">Tersedia</label>
+            <input type="checkbox" name="ketersediaan"  id="ketersediaan" checked="checked" />
+          </div> -->
         </div>
         <div class="card-footer bg-dark"></div>
 

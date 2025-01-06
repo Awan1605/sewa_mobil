@@ -26,49 +26,8 @@ function query($conn, $query)
     return $rows;
 }
 
-function hapusCostumer($ids)
-{
-    global $conn;
 
-    $delete = "DELETE FROM tb_costumer WHERE id_costumer = $ids";
-    mysqli_query($conn, $delete);
-    return mysqli_affected_rows($conn);
-}
-
-function hapusMobil($ids)
-{
-    global $conn;
-
-    $delete = "DELETE FROM tb_mobil WHERE id_mobil = $ids";
-    mysqli_query($conn, $delete);
-    return mysqli_affected_rows($conn);
-}
-
-function hapusOrder($ids)
-{
-    global $conn;
-
-    $delete = "DELETE FROM tb_transaksi WHERE id_sewa = $ids";
-    mysqli_query($conn, $delete);
-    return mysqli_affected_rows($conn);
-}
-
-function tambahCostumer($data)
-{
-    global $conn;
-
-    $namaCostumer = htmlspecialchars($data["nama-costumer"]);
-    $alamatCostumer = htmlspecialchars($data["alamat-costumer"]);
-    $nomerTelepon = htmlspecialchars($data["nomer-telepon"]);
-    $jenisKelamin = htmlspecialchars($data["jenis-kelamin"]);
-
-    $insert = "INSERT INTO tb_costumer VALUES ('', '$namaCostumer', '$alamatCostumer', '$nomerTelepon', '$jenisKelamin')";
-
-    mysqli_query($conn, $insert);
-
-    return mysqli_affected_rows($conn);
-}
-
+//Data Mobil
 function tambahMobil($data)
 {
     global $conn;
@@ -78,96 +37,16 @@ function tambahMobil($data)
         return false;
     }
     $merekMobil = htmlspecialchars($data["merek-mobil"]);
-    $hargaSewa = htmlspecialchars($data["harga-sewa"]);
-    $hargaSewaNilai = htmlspecialchars($data["harga-sewa-nilai"]);
-    $mobilSopir = htmlspecialchars($data["mobil-sopir"]);
+    $modelMobil = htmlspecialchars($data["model-mobil"]);
     $bbm = htmlspecialchars($data["bbm"]);
-    $jumblahPenumpang = htmlspecialchars($data["jumblah-penumpang"]);
+    $hargaSewa = htmlspecialchars($data["harga-sewa"]);
+    $jumblahKursi = htmlspecialchars($data["jumblah-kursi"]);
     $platMobil = htmlspecialchars($data["plat-mobil"]);
 
-    $insert = "INSERT INTO tb_mobil VALUES ('', '$gambarMobil', '$merekMobil', '$hargaSewa', '$hargaSewaNilai', '$mobilSopir','$bbm', $jumblahPenumpang, '$platMobil')";
+    $insert = "INSERT INTO mobil (gambar, merk, model, bbm, harga, jumlah_kursi, plat) 
+               VALUES ('$gambarMobil','$merekMobil','$modelMobil','$bbm','$hargaSewa','$jumblahKursi','$platMobil')";
 
     mysqli_query($conn, $insert);
-
-    return mysqli_affected_rows($conn);
-}
-
-function tambahOrder($data)
-{
-    global $conn;
-
-    $namaCostumer = htmlspecialchars($data["nama-costumer"]);
-    $merekMobil = htmlspecialchars($data["merek-mobil"]);
-    $awalSewa = htmlspecialchars($data["awal-sewa"]);
-    $jangkaWaktu = htmlspecialchars($data["jangka-waktu"]);
-    $hargaSewa = htmlspecialchars($data["harga-sewa"]);
-    $totalBayar = htmlspecialchars($data[""]);
-    $statusBayar = htmlspecialchars($data["status-bayar"]);
-
-    $insert = "INSERT INTO tb_transaksi VALUES ('', '$namaCostumer', '$merekMobil', '$awalSewa', '$jangkaWaktu', '$hargaSewa','$totalBayar', '$statusBayar')";
-
-    mysqli_query($conn, $insert);
-
-    return mysqli_affected_rows($conn);
-}
-
-function ubahCostumer($data)
-{
-    global $conn;
-
-    $id = $data["id-costumer"];
-    $namaCostumer = htmlspecialchars($data["nama-costumer"]);
-    $alamatCostumer = htmlspecialchars($data["alamat-costumer"]);
-    $nomerTelepon = htmlspecialchars($data["nomer-telepon"]);
-    $jenisKelamin = htmlspecialchars($data["jenis-kelamin"]);
-
-    $update = "UPDATE tb_costumer SET nama_costumer = '$namaCostumer', alamat_costumer = '$alamatCostumer', nomer_telepon = '$nomerTelepon', jenis_kelamin = '$jenisKelamin' WHERE id_costumer = $id";
-
-    mysqli_query($conn, $update);
-
-    return mysqli_affected_rows($conn);
-}
-
-function ubahMobil($data)
-{
-    global $conn;
-
-    $id = $data["id-mobil"];
-    $gambarMobil = upload();
-    if (!$gambarMobil) {
-        return false;
-    }
-    $merekMobil = htmlspecialchars($data["merek-mobil"]);
-    $hargaSewa = htmlspecialchars($data["harga-sewa"]);
-    $hargaSewaNilai = htmlspecialchars($data["harga-sewa-nilai"]);
-    $mobilSopir = htmlspecialchars($data["mobil-sopir"]);
-    $bbm = htmlspecialchars($data["bbm"]);
-    $jumblahPenumpang = htmlspecialchars($data["jumblah-penumpang"]);
-    $platMobil = htmlspecialchars($data["plat-mobil"]);
-
-    $update = "UPDATE tb_mobil SET gambar_mobil = '$gambarMobil', merek_mobil = '$merekMobil', harga_sewa_nama = '$hargaSewa', harga_sewa_angka = '$hargaSewaNilai', mobil_sopir = '$mobilSopir', bbm = '$bbm', jumblah_penumpang = '$jumblahPenumpang', plat_mobil = '$platMobil' WHERE id_mobil = $id";
-
-    mysqli_query($conn, $update);
-
-    return mysqli_affected_rows($conn);
-}
-
-function ubahTransaksi($data)
-{
-    global $conn;
-
-    $id = $data["id-sewa"];
-    $namaCostumer = htmlspecialchars($data["nama-costumer"]);
-    $merekMobil = htmlspecialchars($data["merek-mobil"]);
-    $awalSewa = htmlspecialchars($data["awal-sewa"]);
-    $jangkaWaktu = htmlspecialchars($data["jangka-waktu"]);
-    $hargaSewa = htmlspecialchars($data["harga-sewa"]);
-    $totalBayar = htmlspecialchars($data["total-bayar"]);
-    $statusBayar = htmlspecialchars($data["status-bayar"]);
-
-    $update = "UPDATE tb_transaksi SET nama_costumer = '$namaCostumer', merek_mobil = '$merekMobil', tanggal_awal_sewa = '$awalSewa', jangka_waktu_sewa = '$jangkaWaktu', harga_sewa_perhari = '$hargaSewa', total_bayar = '$totalBayar', status_sewa = '$statusBayar' WHERE id_sewa = $id";
-
-    mysqli_query($conn, $update);
 
     return mysqli_affected_rows($conn);
 }
@@ -222,6 +101,153 @@ function upload()
 
     return $namaFileGenerate;
 }
+
+function ubahMobil($data)
+{
+    global $conn;
+
+    $id = $data["id-mobil"];
+    $merekMobil = htmlspecialchars($data["merek-mobil"]);
+    $modelMobil = htmlspecialchars($data["model-mobil"]);
+    $bbm = htmlspecialchars($data["bbm"]);
+    $hargaSewa = htmlspecialchars($data["harga-sewa"]);
+    $jumblahKursi = htmlspecialchars($data["jumlah-kursi"]);
+    $platMobil = htmlspecialchars($data["plat-mobil"]);
+
+    // Check if new image is uploaded
+    if ($_FILES['gambar-mobil']['error'] === 4) {
+        // No new image uploaded, keep existing image
+        $gambarMobil = $data['gambar-lama'];
+    } else {
+        // New image uploaded
+        $gambarMobil = upload();
+        if (!$gambarMobil) {
+            return false;
+        }
+        // Delete old image
+        if ($data['gambar-lama'] != '') {
+            unlink('../../mobil/' . $data['gambar-lama']);
+        }
+    }
+
+    $update = "UPDATE mobil SET 
+               gambar='$gambarMobil', 
+               merk='$merekMobil', 
+               model='$modelMobil', 
+               bbm='$bbm', 
+               harga='$hargaSewa', 
+               jumlah_kursi='$jumblahKursi', 
+               plat='$platMobil' 
+               WHERE id=$id";
+
+    mysqli_query($conn, $update);
+    return mysqli_affected_rows($conn);
+}
+
+function hapusMobil($ids)
+{
+    global $conn;
+
+    $delete = "DELETE FROM mobil WHERE id = $ids";
+    mysqli_query($conn, $delete);
+    return mysqli_affected_rows($conn);
+}
+
+
+function hapusCostumer($ids)
+{
+    global $conn;
+
+    $delete = "DELETE FROM tb_costumer WHERE id_costumer = $ids";
+    mysqli_query($conn, $delete);
+    return mysqli_affected_rows($conn);
+}
+
+
+function hapusOrder($ids)
+{
+    global $conn;
+
+    $delete = "DELETE FROM tb_transaksi WHERE id_sewa = $ids";
+    mysqli_query($conn, $delete);
+    return mysqli_affected_rows($conn);
+}
+
+function tambahCostumer($data)
+{
+    global $conn;
+
+    $namaCostumer = htmlspecialchars($data["nama-costumer"]);
+    $alamatCostumer = htmlspecialchars($data["alamat-costumer"]);
+    $nomerTelepon = htmlspecialchars($data["nomer-telepon"]);
+    $jenisKelamin = htmlspecialchars($data["jenis-kelamin"]);
+
+    $insert = "INSERT INTO tb_costumer VALUES ('', '$namaCostumer', '$alamatCostumer', '$nomerTelepon', '$jenisKelamin')";
+
+    mysqli_query($conn, $insert);
+
+    return mysqli_affected_rows($conn);
+}
+
+
+function tambahOrder($data)
+{
+    global $conn;
+
+    $namaCostumer = htmlspecialchars($data["nama-costumer"]);
+    $merekMobil = htmlspecialchars($data["merek-mobil"]);
+    $awalSewa = htmlspecialchars($data["awal-sewa"]);
+    $jangkaWaktu = htmlspecialchars($data["jangka-waktu"]);
+    $hargaSewa = htmlspecialchars($data["harga-sewa"]);
+    $totalBayar = htmlspecialchars($data[""]);
+    $statusBayar = htmlspecialchars($data["status-bayar"]);
+
+    $insert = "INSERT INTO tb_transaksi VALUES ('', '$namaCostumer', '$merekMobil', '$awalSewa', '$jangkaWaktu', '$hargaSewa','$totalBayar', '$statusBayar')";
+
+    mysqli_query($conn, $insert);
+
+    return mysqli_affected_rows($conn);
+}
+
+function ubahCostumer($data)
+{
+    global $conn;
+
+    $id = $data["id-costumer"];
+    $namaCostumer = htmlspecialchars($data["nama-costumer"]);
+    $alamatCostumer = htmlspecialchars($data["alamat-costumer"]);
+    $nomerTelepon = htmlspecialchars($data["nomer-telepon"]);
+    $jenisKelamin = htmlspecialchars($data["jenis-kelamin"]);
+
+    $update = "UPDATE tb_costumer SET nama_costumer = '$namaCostumer', alamat_costumer = '$alamatCostumer', nomer_telepon = '$nomerTelepon', jenis_kelamin = '$jenisKelamin' WHERE id_costumer = $id";
+
+    mysqli_query($conn, $update);
+
+    return mysqli_affected_rows($conn);
+}
+
+
+function ubahTransaksi($data)
+{
+    global $conn;
+
+    $id = $data["id-sewa"];
+    $namaCostumer = htmlspecialchars($data["nama-costumer"]);
+    $merekMobil = htmlspecialchars($data["merek-mobil"]);
+    $awalSewa = htmlspecialchars($data["awal-sewa"]);
+    $jangkaWaktu = htmlspecialchars($data["jangka-waktu"]);
+    $hargaSewa = htmlspecialchars($data["harga-sewa"]);
+    $totalBayar = htmlspecialchars($data["total-bayar"]);
+    $statusBayar = htmlspecialchars($data["status-bayar"]);
+
+    $update = "UPDATE tb_transaksi SET nama_costumer = '$namaCostumer', merek_mobil = '$merekMobil', tanggal_awal_sewa = '$awalSewa', jangka_waktu_sewa = '$jangkaWaktu', harga_sewa_perhari = '$hargaSewa', total_bayar = '$totalBayar', status_sewa = '$statusBayar' WHERE id_sewa = $id";
+
+    mysqli_query($conn, $update);
+
+    return mysqli_affected_rows($conn);
+}
+
+
 
 //Register
 function registrasi($data)

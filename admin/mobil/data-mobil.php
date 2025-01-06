@@ -3,14 +3,14 @@
 <!-- Menampilkan Data (SELECT.PHP) -->
 <?php require "../functions.php";
 
-$costumer = query($conn, "SELECT * FROM tb_mobil");
+$data_mobil = query($conn, "SELECT * FROM mobil");
 
 if (isset($_POST)) {
 
 }
 
 if (isset($_POST["cari"])) {
-  $costumer = cariMobil($_POST["keyword"]);
+  $data_mobil = cariMobil($_POST["keyword"]);
 }
 
 ?>
@@ -32,7 +32,7 @@ if (isset($_POST["cari"])) {
     <!-- form data barang  -->
     <div class="card mt-4 mb-4">
       <div class="card-header bg-dark text-white text-center">
-        Data Rental Mobil
+        Data Mobil
       </div>
       <div class="card-body">
         <a href="tambah-mobil.php">
@@ -42,41 +42,41 @@ if (isset($_POST["cari"])) {
           <tr>
             <th>No.</th>
             <th>Gambar</th>
-            <th>Merek Mobil</th>
+            <th>Merek</th>
+            <th>Model</th>
             <th>Harga Sewa</th>
-            <th>Harga Sewa Nilai</th>
-            <th>Tersedia</th>
             <th>BBM</th>
-            <th>Jumblah Penumpang</th>
+            <th>Jumblah Kursi</th>
             <th>Plat Mobil</th>
+            <th>Ketersediaan</th>
             <th style="width: 160px;">Aksi</th>
           </tr>
 
-          <?php $id = 1; ?>
-          <?php foreach ($costumer as $row): ?>
+          <?php $nomor = 1; ?>
+          <?php foreach ($data_mobil as $row): ?>
             <tr>
-              <td><?= $id ?></td>
+              <td><?= $nomor ?></td>
               <td>
-                <img src="../../mobil/<?= $row["gambar-mobil"]; ?>" alt="" width="80px" height="60px">
+                <img src="../../mobil/<?= $row["gambar"]; ?>" alt="" width="80px" height="60px">
               </td>
-              <td><?= $row["merek-mobil"]; ?></td>
-              <td><?= $row["harga-sewa-nama"]; ?></td>
-              <td><?= $row["harga-sewa-angka"]; ?></td>
-              <td><?= $row["mobil-sopir"]; ?></td>
+              <td><?= $row["merk"]; ?></td>
+              <td><?= $row["model"]; ?></td>
+              <td><?= $row["harga"]; ?></td>
               <td><?= $row["bbm"]; ?></td>
-              <td width="100px"><?= $row["jumblah-penumpang"]; ?></td>
-              <td><?= $row["plat-mobil"]; ?></td>
-
+              <td width="100px"><?= $row["jumlah_kursi"]; ?></td>
+              <td><?= $row["plat"]; ?></td>
+              <td><?= $row["ketersediaan"]; ?></td>
               <td class="text-center">
-                <a href="edit-mobil.php?id=<?= $row["id_mobil"]; ?>" class="btn btn-warning">Edit</a>
-                <a>
-                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Delete
+                <a href="edit-mobil.php?id=<?= $row["id"]; ?>" class="btn btn-warning">Edit</a>
+                <a href="hapus-mobil.php?id=<?= $row["id"]; ?>>
+                  <button type=" button" class="btn btn-danger" data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop">
+                  Delete
                   </button>
                 </a>
               </td>
             </tr>
-            <?php $id++ ?>
+            <?php $nomor++ ?>
           <?php endforeach; ?>
         </table>
       </div>
@@ -100,7 +100,7 @@ if (isset($_POST["cari"])) {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-          <a href="hapus-mobil.php?id=<?= $row["id_mobil"]; ?>">
+          <a href="hapus-mobil.php?id=<?= $row["id"]; ?>">
             <button type="submit" class="btn btn-danger">Hapus</button>
           </a>
         </div>
@@ -110,3 +110,4 @@ if (isset($_POST["cari"])) {
 </body>
 
 </html>
+<style>
